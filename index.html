@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>消散的合影</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+    }
+
+    .page {
+      display: none;
+      padding: 50px 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1, h2 {
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin: 15px auto;
+      padding: 15px 0;
+      font-size: 16px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 8px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 60vh;
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    .quiet-text {
+      line-height: 1.8;
+      opacity: 0.8;
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 第1页：引导 -->
+<div id="page1" class="page active">
+  <h1>消散的合影</h1>
+  <p>一次关于记忆、陪伴与告别的体验</p>
+  <button class="btn" onclick="goToPage(2)">开始体验</button>
+</div>
+
+<!-- 第2页：选择 -->
+<div id="page2" class="page">
+  <h2>请选择你最熟悉的母亲形象</h2>
+
+  <button class="btn" onclick="playVideo('BV1dkr9BmEfS')">温柔含蓄型</button>
+  <button class="btn" onclick="playVideo('BV15mr9BLE8u')">爽朗直率型</button>
+  <button class="btn" onclick="playVideo('BV19mr9B5E1A')">严慈并济型</button>
+  <button class="btn" onclick="playVideo('BV1Rmr9B5Eeo')">热烈活泼型</button>
+  <button class="btn" onclick="playVideo('BV5555555555')">唠叨亲切型</button>
+  <button class="btn" onclick="playVideo('BV6666666666')">温润细腻型</button>
+</div>
+
+<!-- 第3页：播放 -->
+<div id="page3" class="page">
+  <h2>记忆正在呈现</h2>
+
+  <iframe id="player"></iframe>
+
+  <button class="btn" onclick="endExperience()">观看结束</button>
+</div>
+
+<!-- 第4页：退出界面 -->
+<div id="page4" class="page">
+  <p class="quiet-text">
+    记忆会慢慢消散<br>
+    但被记住的情感仍然存在
+  </p>
+
+  <button class="btn" onclick="restart()">重新体验</button>
+</div>
+
+<script>
+  function goToPage(num) {
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.remove('active');
+    });
+    document.getElementById('page' + num).classList.add('active');
+  }
+
+  function playVideo(bvid) {
+    goToPage(3);
+    document.getElementById('player').src =
+      "https://player.bilibili.com/player.html?bvid=" + bvid + "&autoplay=1";
+  }
+
+  function endExperience() {
+    document.getElementById('player').src = "";
+    goToPage(4);
+  }
+
+  function restart() {
+    goToPage(1);
+  }
+</script>
+
+</body>
+</html>
